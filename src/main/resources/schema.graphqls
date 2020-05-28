@@ -1,0 +1,19 @@
+type Query {
+    pharmacies(filter: PharmacyFilterInput): [Pharmacy!]
+    pharmacyId(id: ID!): Pharmacy
+    pharmacyName(name: String!): Pharmacy
+}
+
+type Pharmacy {
+    id: ID!
+    name: String!
+    address: String
+    phone: String
+    adultMasks: Int
+	childrenMasks: Int
+}
+
+input PharmacyFilterInput {
+    id: String
+    name: String
+}
