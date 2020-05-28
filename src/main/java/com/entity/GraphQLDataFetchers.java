@@ -61,4 +61,20 @@ public class GraphQLDataFetchers {
             return pharmacies.stream().filter(pharmacy -> pharmacy.getName().equals(name)).findFirst().orElse(null);
         };
     }
+
+    public DataFetcher updatePharmacyDataFetcher() {
+        return dataFetchingEnvironment -> {
+            String id = dataFetchingEnvironment.getArgument("id");
+            String input_string = dataFetchingEnvironment.getArgument("input").toString().replace('=', ':');
+            JSONObject input = new JSONObject(input_string);
+
+            for (int i = 0; i < pharmacies.size(); i++) {
+                if (pharmacies.get(i).getId().equals(id)) {
+                    pharmacies.get(i).setName(input.get("name").toString());
+                }
+            }
+
+            return pharmacies.stream().filter(pharmacy -> pharmacy.getId().equals(id)).findFirst();
+        };
+    }
 }

@@ -4,6 +4,10 @@ type Query {
     pharmacyName(name: String!): Pharmacy
 }
 
+type Mutation {
+    updatePharmacy(id: ID!, input: PharmacyUpdateInput!): Pharmacy!
+}
+
 type Pharmacy {
     id: ID!
     name: String!
@@ -16,4 +20,8 @@ type Pharmacy {
 input PharmacyFilterInput {
     id: String
     name: String
+}
+
+input PharmacyUpdateInput {
+    name: String!
 }

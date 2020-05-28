@@ -49,12 +49,18 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
-                .type(TypeRuntimeWiring.newTypeWiring("Query")
-                    .dataFetcher("pharmacies", graphQLDataFetchers.getPharmaciesDataFetcher()))
-                .type(TypeRuntimeWiring.newTypeWiring("Query")
-                    .dataFetcher("pharmacyId", graphQLDataFetchers.getPharmacyIdDataFetcher()))
-                .type(TypeRuntimeWiring.newTypeWiring("Query")
-                    .dataFetcher("pharmacyName", graphQLDataFetchers.getPharmacyNameDataFetcher()))
-                .build();
+            .type(TypeRuntimeWiring.newTypeWiring("Query")
+                .dataFetcher("pharmacies", graphQLDataFetchers.getPharmaciesDataFetcher())
+            )
+            .type(TypeRuntimeWiring.newTypeWiring("Query")
+                .dataFetcher("pharmacyId", graphQLDataFetchers.getPharmacyIdDataFetcher())
+            )
+            .type(TypeRuntimeWiring.newTypeWiring("Query")
+                .dataFetcher("pharmacyName", graphQLDataFetchers.getPharmacyNameDataFetcher())
+            )
+            .type(TypeRuntimeWiring.newTypeWiring("Mutation")
+                .dataFetcher("updatePharmacy", graphQLDataFetchers.updatePharmacyDataFetcher())
+            )
+            .build();
     }
 }
