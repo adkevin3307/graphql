@@ -27,17 +27,15 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getPharmaciesDataFetcher() {
         return dataFetchingEnvironment -> {
-            Map<String, Object> argument = dataFetchingEnvironment.getArguments();
-            if (argument.containsKey("filter")) {
-                String filter_string = argument.get("filter").toString().replace('=', ':');
-                JSONObject filter = new JSONObject(filter_string);
+            if (dataFetchingEnvironment.containsArgument("filter")) {
+                Map<String, String> filter = dataFetchingEnvironment.getArgument("filter");
 
                 Stream<Pharmacy> result = pharmacies.stream();
 
-                if (filter.has("id")) {
+                if (filter.containsKey("id")) {
                     result = result.filter(pharmacy -> pharmacy.getId().contains(filter.get("id").toString()));
                 }
-                if (filter.has("name")) {
+                if (filter.containsKey("name")) {
                     result = result.filter(pharmacy -> pharmacy.getName().contains(filter.get("name").toString()));
                 }
 

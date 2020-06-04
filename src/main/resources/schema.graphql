@@ -18,7 +18,7 @@ type Pharmacy {
 }
 
 input PharmacyFilterInput {
-    id: String
+    id: ID
     name: String
 }
 
